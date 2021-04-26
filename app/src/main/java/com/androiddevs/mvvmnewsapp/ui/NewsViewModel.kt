@@ -12,7 +12,7 @@ import androidx.lifecycle.viewModelScope
 import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
-import com.androiddevs.mvvmnewsapp.repository.NewsRepository
+import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
 import kotlinx.coroutines.launch
 import okio.IOException
@@ -20,7 +20,7 @@ import retrofit2.Response
 
 class NewsViewModel(
     app: Application,
-    val newsRepository: NewsRepository
+    val defaultNewsRepository: DefaultNewsRepository
 ) : AndroidViewModel(app) {
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
@@ -86,13 +86,13 @@ class NewsViewModel(
     }
 
     fun saveArticle(article: Article) = viewModelScope.launch {
-        newsRepository.upsert(article)
+        defaultNewsRepository.upsert(article)
     }
 
-    fun getSavedNews() = newsRepository.getSavedNews()
+    fun getSavedNews() = defaultNewsRepository.getSavedNews()
 
     fun deleteArticle(article: Article) = viewModelScope.launch {
-        newsRepository.deleteArticle(article)
+        defaultNewsRepository.deleteArticle(article)
     }
 
     private suspend fun safeSearchNewsCall(searchQuery: String) {
@@ -100,7 +100,7 @@ class NewsViewModel(
         searchNews.postValue(Resource.Loading())
         try {
             if(hasInternetConnection()) {
-                val response = newsRepository.searchNews(searchQuery, searchNewsPage)
+                val response = defaultNewsRepository.searchNews(searchQuery, searchNewsPage)
                 searchNews.postValue(handleSearchNewsResponse(response))
             } else {
                 searchNews.postValue(Resource.Error("No internet connection"))
@@ -117,7 +117,7 @@ class NewsViewModel(
         breakingNews.postValue(Resource.Loading())
         try {
             if(hasInternetConnection()) {
-                val response = newsRepository.getBreakingNews(countryCode, breakingNewsPage)
+                val response = defaultNewsRepository.getBreakingNews(countryCode, breakingNewsPage)
                 breakingNews.postValue(handleBreakingNewsResponse(response))
             } else {
                 breakingNews.postValue(Resource.Error("No internet connection"))
