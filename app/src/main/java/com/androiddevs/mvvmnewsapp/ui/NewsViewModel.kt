@@ -6,6 +6,7 @@ import android.net.ConnectivityManager
 import android.net.ConnectivityManager.*
 import android.net.NetworkCapabilities.*
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,14 +15,23 @@ import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
+import javax.inject.Inject
+import javax.inject.Named
 
+//@AndroidEntryPoint
 class NewsViewModel(
     app: Application,
     val defaultNewsRepository: DefaultNewsRepository
 ) : AndroidViewModel(app) {
+
+
+    @Inject
+    @Named("tex")
+    lateinit var txtiii:String
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
@@ -35,6 +45,7 @@ class NewsViewModel(
 
 
     init {
+
         getBreakingNews("us")
     }
 
@@ -43,6 +54,7 @@ class NewsViewModel(
     }
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
+        Log.d("fromNewsViwModel", txtiii)
         safeSearchNewsCall(searchQuery)
     }
 
