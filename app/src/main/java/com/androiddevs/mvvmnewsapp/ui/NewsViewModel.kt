@@ -10,6 +10,7 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.models.Article
@@ -32,13 +33,32 @@ class NewsViewModel @ViewModelInject constructor(
 */
 
 
+
+/////////////////////////////
+
     class NewsViewModel(
     app: Application,
     val defaultNewsRepository: DefaultNewsRepository
 ) : AndroidViewModel(app) {
-    
 
 
+
+////////////////////////
+
+
+/*
+        //@AndroidEntryPoint // OHNE ENTRYPOINT!!
+        class NewsViewModel @ViewModelInject constructor(
+            app: Application,
+            val defaultNewsRepository: DefaultNewsRepository
+        ) : AndroidViewModel(app) {
+*/
+
+            /*
+            class ShoppingViewModel @ViewModelInject constructor(
+                private val repository: ShoppingRepository
+            ) : ViewModel() {
+    */
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
