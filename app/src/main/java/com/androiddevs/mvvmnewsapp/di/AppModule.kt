@@ -21,4 +21,9 @@ object AppModule {
     @Named("tex2")
     fun provideText2():String = "thghdwoooooooooooooooooo"
 
+    @Provides
+    @Singleton
+    @Named("tex3")
+    fun provideText3():String = "333333333333333oo"
+
 }

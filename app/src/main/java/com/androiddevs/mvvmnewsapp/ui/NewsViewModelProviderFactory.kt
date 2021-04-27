@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 
 class NewsViewModelProviderFactory(
+    val stringTest:String,
     val app: Application,
     val defaultNewsRepository: DefaultNewsRepository
 ) : ViewModelProvider.Factory {
