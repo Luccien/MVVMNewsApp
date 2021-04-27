@@ -17,7 +17,17 @@ class DefaultNewsRepository(
 
     @Inject
     lateinit var newsApi:NewsAPI
-    
+
+
+/*
+    override suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
+        newsApi.getBreakingNews(countryCode, pageNumber)
+
+    override suspend fun searchNews(searchQuery: String, pageNumber: Int) =
+        newsApi.searchForNews(searchQuery, pageNumber)
+*/
+
+
 
     override suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
         RetrofitInstance.api.getBreakingNews(countryCode, pageNumber)
