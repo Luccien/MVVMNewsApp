@@ -15,4 +15,10 @@ object AppModule {
     @Singleton
     @Named("tex")
     fun provideText():String = "thghdw"
+
+    @Provides
+    @Singleton
+    @Named("tex2")
+    fun provideText2():String = "thghdwoooooooooooooooooo"
+
 }

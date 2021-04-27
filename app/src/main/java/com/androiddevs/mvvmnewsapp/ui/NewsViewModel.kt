@@ -7,6 +7,7 @@ import android.net.ConnectivityManager.*
 import android.net.NetworkCapabilities.*
 import android.os.Build
 import android.util.Log
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -22,12 +23,20 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Named
 
-//@AndroidEntryPoint
-class NewsViewModel(
+/*
+class NewsViewModel @ViewModelInject constructor(
+    app: Application,
+    val defaultNewsRepository: DefaultNewsRepository,
+    @Named("tex2") testString2:String
+) : AndroidViewModel(app) {
+*/
+
+
+    class NewsViewModel(
     app: Application,
     val defaultNewsRepository: DefaultNewsRepository
 ) : AndroidViewModel(app) {
-
+    
 
 
 
