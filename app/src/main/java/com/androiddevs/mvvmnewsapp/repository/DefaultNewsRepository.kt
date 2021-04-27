@@ -1,5 +1,6 @@
 package com.androiddevs.mvvmnewsapp.repository
 
+import com.androiddevs.mvvmnewsapp.api.NewsAPI
 import com.androiddevs.mvvmnewsapp.api.RetrofitInstance
 import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.models.Article
@@ -13,6 +14,10 @@ class DefaultNewsRepository(
     @Inject
     @Named("tex3")
     lateinit var txtiii333:String
+
+    @Inject
+    lateinit var newsApi:NewsAPI
+    
 
     override suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
         RetrofitInstance.api.getBreakingNews(countryCode, pageNumber)
