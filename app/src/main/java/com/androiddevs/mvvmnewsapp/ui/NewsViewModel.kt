@@ -29,9 +29,7 @@ class NewsViewModel(
 ) : AndroidViewModel(app) {
 
 
-    @Inject
-    @Named("tex")
-    lateinit var txtiii:String
+
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
@@ -54,7 +52,7 @@ class NewsViewModel(
     }
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
-        Log.d("fromNewsViwModel", txtiii)
+
         safeSearchNewsCall(searchQuery)
     }
 
