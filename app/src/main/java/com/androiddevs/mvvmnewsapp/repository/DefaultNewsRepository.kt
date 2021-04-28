@@ -14,7 +14,7 @@ import javax.inject.Inject
 import javax.inject.Named
 
 class DefaultNewsRepository(
-    val db: ArticleDatabase
+    //val db: ArticleDatabase
 ):NewsRepository {
 
     @Inject
