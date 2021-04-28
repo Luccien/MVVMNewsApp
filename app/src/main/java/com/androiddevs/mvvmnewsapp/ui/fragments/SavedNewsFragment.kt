@@ -65,9 +65,10 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
             attachToRecyclerView(rvSavedNews)
         }
 
+        /* TODO  testing undo it
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { articles ->
             newsAdapter.differ.submitList(articles)
-        })
+        })*/
     }
 
     private fun setupRecyclerView() {

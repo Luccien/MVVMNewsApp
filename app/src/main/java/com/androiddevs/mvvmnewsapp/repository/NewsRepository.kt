@@ -14,10 +14,11 @@ interface NewsRepository {
 
     suspend fun searchNews(searchQuery: String, pageNumber: Int): Response<NewsResponse>
 
+    /*
     suspend fun upsert(article: Article):Long
 
     fun getSavedNews(): LiveData<List<Article>>
 
     suspend fun deleteArticle(article: Article)
-
+*/
 }
