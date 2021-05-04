@@ -177,6 +177,7 @@ class NewsViewModel @ViewModelInject constructor(
         }
     }
 
+    // TODO
     private fun hasInternetConnection(): Boolean {
        /* val connectivityManager = getApplication<NewsApplication>().getSystemService(
             Context.CONNECTIVITY_SERVICE
