@@ -16,8 +16,10 @@ import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
+import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
@@ -35,11 +37,12 @@ class NewsViewModel @ViewModelInject constructor(
 
 
 /////////////////////////////
+    @ExperimentalCoroutinesApi
+    class NewsViewModel
+    @ViewModelInject constructor(
+    private val defaultNewsRepository: NewsRepository
+): ViewModel() {
 
-    class NewsViewModel(
-    app: Application,
-    val defaultNewsRepository: DefaultNewsRepository
-) : AndroidViewModel(app) {
 
 
 
@@ -124,6 +127,9 @@ class NewsViewModel @ViewModelInject constructor(
         return Resource.Error(response.message())
     }
 
+
+
+    /*   //// TODO ADD IT BACK LATER
     fun saveArticle(article: Article) = viewModelScope.launch {
         defaultNewsRepository.upsert(article)
     }
@@ -134,6 +140,8 @@ class NewsViewModel @ViewModelInject constructor(
         defaultNewsRepository.deleteArticle(article)
     }
 
+
+     */
     private suspend fun safeSearchNewsCall(searchQuery: String) {
         newSearchQuery = searchQuery
         searchNews.postValue(Resource.Loading())
@@ -170,7 +178,7 @@ class NewsViewModel @ViewModelInject constructor(
     }
 
     private fun hasInternetConnection(): Boolean {
-        val connectivityManager = getApplication<NewsApplication>().getSystemService(
+       /* val connectivityManager = getApplication<NewsApplication>().getSystemService(
             Context.CONNECTIVITY_SERVICE
         ) as ConnectivityManager
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -193,7 +201,11 @@ class NewsViewModel @ViewModelInject constructor(
             }
         }
         return false
+
+        */
+        return true /// TODO CHANG THIS FUNCTION
     }
+
 }
 
 

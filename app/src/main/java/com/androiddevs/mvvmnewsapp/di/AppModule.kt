@@ -1,6 +1,8 @@
 package com.androiddevs.mvvmnewsapp.di
 
 import com.androiddevs.mvvmnewsapp.api.NewsAPI
+import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
+import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Constants
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.BASE_URL
 import dagger.Module
@@ -17,6 +19,22 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object AppModule {
+
+
+
+
+
+        @Singleton
+        @Provides
+        fun provideDefaultNewsRepository(
+            newsApi:NewsAPI
+        ): NewsRepository{
+            return DefaultNewsRepository(newsApi)
+        }
+
+
+
+
 
     @Provides
     @Singleton

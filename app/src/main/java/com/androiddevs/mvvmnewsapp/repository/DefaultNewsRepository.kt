@@ -1,14 +1,6 @@
 package com.androiddevs.mvvmnewsapp.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
 import com.androiddevs.mvvmnewsapp.api.NewsAPI
-import com.androiddevs.mvvmnewsapp.api.RetrofitInstance
-import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.models.Article
 import javax.inject.Inject
 import javax.inject.Named

@@ -1,8 +1,5 @@
 package com.androiddevs.mvvmnewsapp.repository
 
-import androidx.lifecycle.LiveData
-import com.androiddevs.mvvmnewsapp.api.RetrofitInstance
-import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import retrofit2.Response
 
