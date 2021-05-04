@@ -13,35 +13,36 @@ import com.androiddevs.mvvmnewsapp.models.Article
 import javax.inject.Inject
 import javax.inject.Named
 
-class DefaultNewsRepository(
+class DefaultNewsRepository constructor(
     //val db: ArticleDatabase
+    private val newsApi:NewsAPI
 ):NewsRepository {
 
     @Inject
     @Named("tex3")
     lateinit var txtiii333:String
 
-    @Inject
-    lateinit var newsApi:NewsAPI
+   //@Inject
+    //lateinit var newsApi:NewsAPI
 
 
-/*
+
     override suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
         newsApi.getBreakingNews(countryCode, pageNumber)
 
     override suspend fun searchNews(searchQuery: String, pageNumber: Int) =
         newsApi.searchForNews(searchQuery, pageNumber)
-*/
 
 
 
+/*  ORGINAL !!!
     override suspend fun getBreakingNews(countryCode: String, pageNumber: Int) =
         RetrofitInstance.api.getBreakingNews(countryCode, pageNumber)
 
     override suspend fun searchNews(searchQuery: String, pageNumber: Int) =
         RetrofitInstance.api.searchForNews(searchQuery, pageNumber)
 
-
+*/
     /////////////
     /*
     @Insert(onConflict = OnConflictStrategy.REPLACE)
