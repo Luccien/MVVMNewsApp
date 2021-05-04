@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,8 @@ import kotlinx.android.synthetic.main.item_error_message.*
 
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
+
+    private val viewModel: NewsViewModel by viewModels()
     //lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
 
