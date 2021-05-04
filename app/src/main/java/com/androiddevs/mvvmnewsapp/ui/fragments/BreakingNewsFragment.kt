@@ -31,8 +31,6 @@ class BreakingNewsFragment @Inject constructor(
 
 
     private val viewModel: NewsViewModel by viewModels()
-    //lateinit var viewModel: NewsViewModel
-   // lateinit var newsAdapter: NewsAdapter
 
     val TAG = "BreakingNewsFragment"
 

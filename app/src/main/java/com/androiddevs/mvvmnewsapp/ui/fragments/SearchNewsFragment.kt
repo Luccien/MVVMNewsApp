@@ -7,6 +7,7 @@ import android.widget.AbsListView
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,24 +19,26 @@ import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.androiddevs.mvvmnewsapp.util.Constants
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import com.androiddevs.mvvmnewsapp.util.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.android.synthetic.main.fragment_search_news.paginationProgressBar
 import kotlinx.android.synthetic.main.item_error_message.*
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+class SearchNewsFragment @Inject constructor(
+    private val newsAdapter:NewsAdapter
+):Fragment(R.layout.fragment_search_news) {
 
-    //lateinit TODO  var viewModel: NewsViewModel
-    lateinit var newsAdapter: NewsAdapter
+    private val viewModel: NewsViewModel by viewModels()
+
     val TAG = "SearchNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // TODO  viewModel = (activity as NewsActivity).viewModel
-        // TODO setupRecyclerView()
+        setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
@@ -54,12 +57,12 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 delay(SEARCH_NEWS_TIME_DELAY)
                 editable?.let {
                     if(editable.toString().isNotEmpty()) {
-                       // TODO viewModel.searchNews(editable.toString())
+                       viewModel.searchNews(editable.toString())
                     }
                 }
             }
         }
-/*
+
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is Resource.Success -> {
@@ -95,9 +98,9 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             }
         }
     }
-    */
 
-/*
+
+
     private fun hideProgressBar() {
         paginationProgressBar.visibility = View.INVISIBLE
         isLoading = false
@@ -156,12 +159,12 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
+
         rvSearchNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
             addOnScrollListener(this@SearchNewsFragment.scrollListener)
         }
-        */
+
     }
 }

@@ -3,6 +3,7 @@ package com.androiddevs.mvvmnewsapp.ui.fragments
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -13,17 +14,22 @@ import com.androiddevs.mvvmnewsapp.adapters.NewsAdapter
 import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.android.synthetic.main.fragment_saved_news.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
-class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+class SavedNewsFragment @Inject constructor(
+    private val newsAdapter:NewsAdapter
+): Fragment(R.layout.fragment_saved_news) {
 
-    // TODO lateinit var viewModel: NewsViewModel
-    lateinit var newsAdapter: NewsAdapter
+    private val viewModel: NewsViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       //  TODO viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
@@ -51,7 +57,7 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val article = newsAdapter.differ.currentList[position]
-                /*
+                /* TODO later
                 viewModel.deleteArticle(article)
                 Snackbar.make(view, "Successfully deleted article", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo") {
@@ -75,7 +81,7 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
+
         rvSavedNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
