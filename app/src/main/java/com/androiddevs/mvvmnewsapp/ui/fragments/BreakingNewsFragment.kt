@@ -17,15 +17,22 @@ import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.QUERY_PAGE_SIZE
 import com.androiddevs.mvvmnewsapp.util.Resource
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.android.synthetic.main.item_error_message.*
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import javax.inject.Inject
 
-class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
+class BreakingNewsFragment @Inject constructor(
+    private val newsAdapter:NewsAdapter
+): Fragment(R.layout.fragment_breaking_news) {
 
 
     private val viewModel: NewsViewModel by viewModels()
     //lateinit var viewModel: NewsViewModel
-    lateinit var newsAdapter: NewsAdapter
+   // lateinit var newsAdapter: NewsAdapter
 
     val TAG = "BreakingNewsFragment"
 
@@ -140,7 +147,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
     }
 
     private fun setupRecyclerView() {
-        newsAdapter = NewsAdapter()
+        //TODO CHECK HERE WHEN NOT WORKING ---> newsAdapter = NewsAdapter()
         rvBreakingNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
