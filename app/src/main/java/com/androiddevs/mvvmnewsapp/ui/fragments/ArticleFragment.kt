@@ -22,21 +22,25 @@ class ArticleFragment : Fragment(R.layout.fragment_article) {
     @Named("tex2")
     lateinit var txtiii22:String
 
-    lateinit var viewModel: NewsViewModel
+    //lateinit var viewModel: NewsViewModel
     val args: ArticleFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        /*
         viewModel = (activity as NewsActivity).viewModel
         val article = args.article
         webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url)
         }
-        Log.d("TAGGG","lllllluuuuuuuuuu + $txtiii22")
+
+         */
+        //Log.d("TAGGG","lllllluuuuuuuuuu + $txtiii22")
 
         fab.setOnClickListener {
-            viewModel.saveArticle(article)
+            //viewModel.saveArticle(article)
             Snackbar.make(view, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
         }
     }

@@ -28,14 +28,14 @@ import kotlinx.coroutines.launch
 
 class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
-    lateinit var viewModel: NewsViewModel
+    //lateinit TODO  var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
     val TAG = "SearchNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
-        setupRecyclerView()
+       // TODO  viewModel = (activity as NewsActivity).viewModel
+        // TODO setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
             val bundle = Bundle().apply {
@@ -54,12 +54,12 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 delay(SEARCH_NEWS_TIME_DELAY)
                 editable?.let {
                     if(editable.toString().isNotEmpty()) {
-                        viewModel.searchNews(editable.toString())
+                       // TODO viewModel.searchNews(editable.toString())
                     }
                 }
             }
         }
-
+/*
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is Resource.Success -> {
@@ -95,7 +95,9 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             }
         }
     }
+    */
 
+/*
     private fun hideProgressBar() {
         paginationProgressBar.visibility = View.INVISIBLE
         isLoading = false
@@ -160,5 +162,6 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             layoutManager = LinearLayoutManager(activity)
             addOnScrollListener(this@SearchNewsFragment.scrollListener)
         }
+        */
     }
 }

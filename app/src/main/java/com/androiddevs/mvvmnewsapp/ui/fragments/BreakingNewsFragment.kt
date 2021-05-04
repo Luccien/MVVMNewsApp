@@ -21,13 +21,16 @@ import kotlinx.android.synthetic.main.item_error_message.*
 
 class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
-    lateinit var viewModel: NewsViewModel
+    //lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
 
     val TAG = "BreakingNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+      /*
         viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
 
@@ -71,6 +74,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
         btnRetry.setOnClickListener {
             viewModel.getBreakingNews("us")
         }
+
+       */
     }
 
     private fun hideProgressBar() {
@@ -101,6 +106,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
 
     val scrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+
             super.onScrolled(recyclerView, dx, dy)
 
             val layoutManager = recyclerView.layoutManager as LinearLayoutManager
@@ -116,7 +122,7 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
             val shouldPaginate = isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
                     isTotalMoreThanVisible && isScrolling
             if(shouldPaginate) {
-                viewModel.getBreakingNews("us")
+            //--------------------------->  TODO    viewModel.getBreakingNews("us")
                 isScrolling = false
             }
         }

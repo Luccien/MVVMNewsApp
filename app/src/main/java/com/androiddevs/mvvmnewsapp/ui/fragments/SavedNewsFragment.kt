@@ -18,12 +18,12 @@ import kotlinx.android.synthetic.main.fragment_saved_news.*
 
 class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
 
-    lateinit var viewModel: NewsViewModel
+    // TODO lateinit var viewModel: NewsViewModel
     lateinit var newsAdapter: NewsAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as NewsActivity).viewModel
+       //  TODO viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
@@ -51,13 +51,16 @@ class SavedNewsFragment : Fragment(R.layout.fragment_saved_news) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val article = newsAdapter.differ.currentList[position]
+                /*
                 viewModel.deleteArticle(article)
                 Snackbar.make(view, "Successfully deleted article", Snackbar.LENGTH_LONG).apply {
                     setAction("Undo") {
                         viewModel.saveArticle(article)
                     }
                     show()
-                }
+
+
+                }*/
             }
         }
 
