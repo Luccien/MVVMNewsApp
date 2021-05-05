@@ -141,7 +141,6 @@ class BreakingNewsFragment @Inject constructor(
     }
 
     private fun setupRecyclerView() {
-        //TODO CHECK HERE WHEN NOT WORKING ---> newsAdapter = NewsAdapter()
         rvBreakingNews.apply {
             adapter = newsAdapter
             layoutManager = LinearLayoutManager(activity)
