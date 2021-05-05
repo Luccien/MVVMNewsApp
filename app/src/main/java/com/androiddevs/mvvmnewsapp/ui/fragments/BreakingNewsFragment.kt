@@ -37,9 +37,6 @@ class BreakingNewsFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-
-        //viewModel = (activity as NewsActivity).viewModel
         setupRecyclerView()
 
         newsAdapter.setOnItemClickListener {
@@ -53,7 +50,6 @@ class BreakingNewsFragment @Inject constructor(
         }
 
 
-        //viewModel.observe(viewLifecycleOwner, Observer { response ->
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
             when(response) {
                 is Resource.Success -> {
@@ -131,7 +127,7 @@ class BreakingNewsFragment @Inject constructor(
             val shouldPaginate = isNoErrors && isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
                     isTotalMoreThanVisible && isScrolling
             if(shouldPaginate) {
-            //--------------------------->  TODO    viewModel.getBreakingNews("us")
+                viewModel.getBreakingNews("us")
                 isScrolling = false
             }
         }

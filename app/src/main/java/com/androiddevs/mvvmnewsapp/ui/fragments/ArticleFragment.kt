@@ -39,7 +39,7 @@ class ArticleFragment @Inject constructor(): Fragment(R.layout.fragment_article)
 
 
         fab.setOnClickListener {
-            // TODO viewModel.saveArticle(article)
+            viewModel.saveArticle(article)
             Snackbar.make(view, "Article saved successfully", Snackbar.LENGTH_SHORT).show()
         }
     }
