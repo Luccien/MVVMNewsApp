@@ -1,6 +1,9 @@
 package com.androiddevs.mvvmnewsapp.di
 
+import android.content.Context
+import androidx.room.Room
 import com.androiddevs.mvvmnewsapp.api.NewsAPI
+import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Constants
@@ -9,6 +12,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -21,6 +25,28 @@ import javax.inject.Singleton
 object AppModule {
 
 
+
+    @Singleton
+    @Provides
+    fun provideArticleDatabase(
+        @ApplicationContext context: Context
+    ) = Room.databaseBuilder(
+        context.applicationContext,
+        ArticleDatabase::class.java,
+        "article_db.db"
+    ).build()
+
+            //= Room.databaseBuilder(context, ShoppingItemDatabase::class.java, DATABASE_NAME).build()
+
+
+
+
+
+    @Singleton
+    @Provides
+    fun provideArticleDao(
+        database: ArticleDatabase
+    ) = database.getArticleDao()
 
 
 

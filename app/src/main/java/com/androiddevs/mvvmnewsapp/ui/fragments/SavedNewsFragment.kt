@@ -74,7 +74,7 @@ class SavedNewsFragment @Inject constructor(
             attachToRecyclerView(rvSavedNews)
         }
 
-        /* TODO  testing undo it
+        /*
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { articles ->
             newsAdapter.differ.submitList(articles)
         })*/
