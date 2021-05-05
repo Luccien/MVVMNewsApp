@@ -3,6 +3,7 @@ package com.androiddevs.mvvmnewsapp.di
 import android.content.Context
 import androidx.room.Room
 import com.androiddevs.mvvmnewsapp.api.NewsAPI
+import com.androiddevs.mvvmnewsapp.db.ArticleDao
 import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
@@ -53,12 +54,15 @@ object AppModule {
         @Singleton
         @Provides
         fun provideDefaultNewsRepository(
+            dao: ArticleDao,
             newsApi:NewsAPI
-        ): NewsRepository{
-            return DefaultNewsRepository(newsApi)
-        }
+        ) = DefaultNewsRepository(dao, newsApi) as NewsRepository
 
+       /* ): NewsRepository{
+            return DefaultNewsRepository(dao,newsApi)
+        }*/
 
+    //) = DefaultShoppingRepository(dao, api) as ShoppingRepository
 
 
 

@@ -1,21 +1,17 @@
 package com.androiddevs.mvvmnewsapp.repository
 
 import com.androiddevs.mvvmnewsapp.api.NewsAPI
+import com.androiddevs.mvvmnewsapp.db.ArticleDao
 import com.androiddevs.mvvmnewsapp.models.Article
 import javax.inject.Inject
 import javax.inject.Named
 
 class DefaultNewsRepository constructor(
-    //val db: ArticleDatabase
+    private val dao: ArticleDao,
     private val newsApi:NewsAPI
 ):NewsRepository {
 
-    @Inject
-    @Named("tex3")
-    lateinit var txtiii333:String
 
-   //@Inject
-    //lateinit var newsApi:NewsAPI
 
 
 
