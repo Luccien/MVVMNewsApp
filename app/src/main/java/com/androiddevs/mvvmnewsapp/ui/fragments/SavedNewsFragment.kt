@@ -1,7 +1,6 @@
 package com.androiddevs.mvvmnewsapp.ui.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,11 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.androiddevs.mvvmnewsapp.R
 import com.androiddevs.mvvmnewsapp.adapters.NewsAdapter
-import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.android.synthetic.main.fragment_saved_news.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
@@ -77,8 +74,7 @@ class SavedNewsFragment @Inject constructor(
 
 
         viewModel.getSavedNews().observe(viewLifecycleOwner, Observer { articles ->
-            Log.d("TAGGGG","just see whats ther $articles" )
-            Log.d("TAGGGG","just see whats ther $articles" )
+
             // TODO check for article legth 0 -- > will crash newsAdapter.differ
             newsAdapter.differ.submitList(articles)
         })

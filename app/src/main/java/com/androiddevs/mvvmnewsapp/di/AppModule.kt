@@ -37,18 +37,12 @@ object AppModule {
         "article_db.db"
     ).build()
 
-            //= Room.databaseBuilder(context, ShoppingItemDatabase::class.java, DATABASE_NAME).build()
-
-
-
-
 
     @Singleton
     @Provides
     fun provideArticleDao(
         database: ArticleDatabase
     ) = database.getArticleDao()
-
 
 
         @Singleton
@@ -58,81 +52,23 @@ object AppModule {
             newsApi:NewsAPI
         ) = DefaultNewsRepository(dao, newsApi) as NewsRepository
 
-       /* ): NewsRepository{
-            return DefaultNewsRepository(dao,newsApi)
-        }*/
 
-    //) = DefaultShoppingRepository(dao, api) as ShoppingRepository
-
-
-
-    @Provides
-    @Singleton
-    @Named("tex")
-    fun provideText():String = "thghdw"
-
-    @Provides
-    @Singleton
-    @Named("tex2")
-    fun provideText2():String = "thghdwoooooooooooooooooo"
-
-    @Provides
-    @Singleton
-    @Named("tex3")
-    fun provideText3():String = "333333333333333oo"
-
-
-
-
-/*
-    @Singleton
-    @Provides
-    fun providePixabayApi(): PixabayAPI {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL)
-            .build()
-            .create(PixabayAPI::class.java)
-    }
-
- */
-/////////////////////////////
     @Singleton
     @Provides
     fun provideNewsApi(): NewsAPI {
-//
-    val logging = HttpLoggingInterceptor()
-    logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-    val client = OkHttpClient.Builder()
-        .addInterceptor(logging)
-        .build()
-  ////
-    return Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .baseUrl(BASE_URL)
-        .client(client)
-        .build()
-        .create(NewsAPI::class.java)
-    }
-/////////////////////////////////////
-
-/*
-    private val retrofit by lazy {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
         val client = OkHttpClient.Builder()
-            .addInterceptor(logging)
+             .addInterceptor(logging)
             .build()
-        Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
+
+        return Retrofit.Builder()
+             .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl(BASE_URL)
             .client(client)
-            .build()
+             .build()
+            .create(NewsAPI::class.java)
     }
 
-    val api by lazy {
-        retrofit.create(NewsAPI::class.java)
-    }
-*/
 
 }

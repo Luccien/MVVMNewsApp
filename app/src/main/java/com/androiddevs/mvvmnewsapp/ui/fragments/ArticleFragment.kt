@@ -29,14 +29,11 @@ class ArticleFragment @Inject constructor(): Fragment(R.layout.fragment_article)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val article = args.article
         webView.apply {
             webViewClient = WebViewClient()
             loadUrl(article.url)
         }
-
-
 
         fab.setOnClickListener {
             viewModel.saveArticle(article)

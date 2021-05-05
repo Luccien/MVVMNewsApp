@@ -15,30 +15,16 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject
 import javax.inject.Named
 
-@ExperimentalCoroutinesApi /// TODO necessary here?? TEST WITHOUT
+@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class NewsActivity : AppCompatActivity() {
 
-    /*
-    lateinit var viewModel: NewsViewModel
 
-    @Inject
-    @Named("tex")
-    lateinit var txtiii:String
-*/
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
         bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController())
 
-        /*
-        val newsRepository = DefaultNewsRepository()//ArticleDatabase(this))
-        val viewModelProviderFactory = NewsViewModelProviderFactory(txtiii, application, newsRepository)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(NewsViewModel::class.java)
-        bottomNavigationView.setupWithNavController(newsNavHostFragment.findNavController())
-
-        Log.d("fromNewsViwModel", txtiii)
-        */
     }
 }

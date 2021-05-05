@@ -1,41 +1,25 @@
 package com.androiddevs.mvvmnewsapp.ui
 
-import android.app.Application
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.ConnectivityManager.*
-import android.net.NetworkCapabilities.*
-import android.os.Build
-import android.util.Log
+
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.androiddevs.mvvmnewsapp.NewsApplication
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
-import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
 import com.androiddevs.mvvmnewsapp.util.Resource
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import okio.IOException
 import retrofit2.Response
-import javax.inject.Inject
-import javax.inject.Named
 
 
-
-    @ExperimentalCoroutinesApi
-    class NewsViewModel
+@ExperimentalCoroutinesApi
+class NewsViewModel
     @ViewModelInject constructor(
     private val defaultNewsRepository: NewsRepository
 ): ViewModel() {
-
-
-
 
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
@@ -152,7 +136,7 @@ import javax.inject.Named
         }
     }
 
-    // TODO
+    // TODO IMPLEMENT
     private fun hasInternetConnection(): Boolean {
        /* val connectivityManager = getApplication<NewsApplication>().getSystemService(
             Context.CONNECTIVITY_SERVICE
@@ -179,7 +163,7 @@ import javax.inject.Named
         return false
 
         */
-        return true /// TODO CHANG THIS FUNCTION
+        return true
     }
 
 }
