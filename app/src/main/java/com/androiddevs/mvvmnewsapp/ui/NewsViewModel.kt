@@ -26,17 +26,8 @@ import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Named
 
-/*
-class NewsViewModel @ViewModelInject constructor(
-    app: Application,
-    val defaultNewsRepository: DefaultNewsRepository,
-    @Named("tex2") testString2:String
-) : AndroidViewModel(app) {
-*/
 
 
-
-/////////////////////////////
     @ExperimentalCoroutinesApi
     class NewsViewModel
     @ViewModelInject constructor(
@@ -46,22 +37,6 @@ class NewsViewModel @ViewModelInject constructor(
 
 
 
-////////////////////////
-
-
-/*
-        //@AndroidEntryPoint // OHNE ENTRYPOINT!!
-        class NewsViewModel @ViewModelInject constructor(
-            app: Application,
-            val defaultNewsRepository: DefaultNewsRepository
-        ) : AndroidViewModel(app) {
-*/
-
-            /*
-            class ShoppingViewModel @ViewModelInject constructor(
-                private val repository: ShoppingRepository
-            ) : ViewModel() {
-    */
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
@@ -129,7 +104,7 @@ class NewsViewModel @ViewModelInject constructor(
 
 
 
-    /*   //// TODO ADD IT BACK LATER
+
     fun saveArticle(article: Article) = viewModelScope.launch {
         defaultNewsRepository.upsert(article)
     }
@@ -141,7 +116,7 @@ class NewsViewModel @ViewModelInject constructor(
     }
 
 
-     */
+
     private suspend fun safeSearchNewsCall(searchQuery: String) {
         newSearchQuery = searchQuery
         searchNews.postValue(Resource.Loading())
