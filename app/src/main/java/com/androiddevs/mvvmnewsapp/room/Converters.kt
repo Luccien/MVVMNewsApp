@@ -1,4 +1,4 @@
-package com.androiddevs.mvvmnewsapp.db
+package com.androiddevs.mvvmnewsapp.room
 
 import androidx.room.TypeConverter
 import com.androiddevs.mvvmnewsapp.models.Source

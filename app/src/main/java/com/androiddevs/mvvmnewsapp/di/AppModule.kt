@@ -2,12 +2,11 @@ package com.androiddevs.mvvmnewsapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.androiddevs.mvvmnewsapp.api.NewsAPI
-import com.androiddevs.mvvmnewsapp.db.ArticleDao
-import com.androiddevs.mvvmnewsapp.db.ArticleDatabase
+import com.androiddevs.mvvmnewsapp.retrofit.NewsAPI
+import com.androiddevs.mvvmnewsapp.room.ArticleDao
+import com.androiddevs.mvvmnewsapp.room.ArticleDatabase
 import com.androiddevs.mvvmnewsapp.repository.DefaultNewsRepository
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
-import com.androiddevs.mvvmnewsapp.util.Constants
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -18,7 +17,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module

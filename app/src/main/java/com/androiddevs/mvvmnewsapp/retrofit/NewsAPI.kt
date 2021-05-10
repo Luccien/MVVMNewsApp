@@ -1,4 +1,4 @@
-package com.androiddevs.mvvmnewsapp.api
+package com.androiddevs.mvvmnewsapp.retrofit
 
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.API_KEY
