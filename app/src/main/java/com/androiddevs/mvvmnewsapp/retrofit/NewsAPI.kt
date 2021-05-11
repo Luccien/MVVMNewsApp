@@ -1,7 +1,7 @@
 package com.androiddevs.mvvmnewsapp.retrofit
 
+import com.androiddevs.mvvmnewsapp.BuildConfig
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
-import com.androiddevs.mvvmnewsapp.util.Constants.Companion.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -14,8 +14,8 @@ interface NewsAPI {
         countryCode: String = "us",
         @Query("page")
         pageNumber: Int = 1,
-        @Query("apiKey")
-        apiKey: String = API_KEY
+         @Query("apiKey")
+        apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponse>
 
     @GET("v2/everything")
@@ -25,6 +25,6 @@ interface NewsAPI {
         @Query("page")
         pageNumber: Int = 1,
         @Query("apiKey")
-        apiKey: String = API_KEY
+        apiKey: String = BuildConfig.API_KEY
     ): Response<NewsResponse>
 }
