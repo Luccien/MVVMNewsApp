@@ -58,10 +58,10 @@ class NewsViewModel
                     val newArticles = resultResponse.articles
                     oldArticles?.addAll(newArticles)
                 }
-                return Resource.Success(breakingNewsResponse ?: resultResponse)
+                return Resource.success(breakingNewsResponse ?: resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(),null)
     }
 
 
@@ -80,10 +80,10 @@ class NewsViewModel
                     val newArticles = resultResponse.articles
                     oldArticles?.addAll(newArticles)
                 }
-                return Resource.Success(searchNewsResponse ?: resultResponse)
+                return Resource.success(searchNewsResponse ?: resultResponse)
             }
         }
-        return Resource.Error(response.message())
+        return Resource.error(response.message(),null)
     }
 
 
@@ -98,10 +98,10 @@ class NewsViewModel
 
         if(article.urlToImage !="") {
             saveArticleIntoDB(article)
-            insertBreakingNewsStatus.postValue(Resource.Success(article))
+            insertBreakingNewsStatus.postValue(Resource.success(article))
         }
         else{
-            insertBreakingNewsStatus.postValue(Resource.Error("Error: The urlToImage is missing",null))
+            insertBreakingNewsStatus.postValue(Resource.error("Error: The urlToImage is missing",null))
             return
         }
     }
@@ -116,35 +116,35 @@ class NewsViewModel
 
     private suspend fun safeSearchNewsCall(searchQuery: String) {
         newSearchQuery = searchQuery
-        searchNews.postValue(Resource.Loading())
+        searchNews.postValue(Resource.loading(null))
         try {
             if(hasInternetConnection()) {
                 val response = defaultNewsRepository.searchNews(searchQuery, searchNewsPage)
                 searchNews.postValue(handleSearchNewsResponse(response))
             } else {
-                searchNews.postValue(Resource.Error("No internet connection"))
+                searchNews.postValue(Resource.error("No internet connection",null))
             }
         } catch(t: Throwable) {
             when(t) {
-                is IOException -> searchNews.postValue(Resource.Error("Network Failure"))
-                else -> searchNews.postValue(Resource.Error("Conversion Error"))
+                is IOException -> searchNews.postValue(Resource.error("Network Failure",null))
+                else -> searchNews.postValue(Resource.error("Conversion Error",null))
             }
         }
     }
 
     private suspend fun safeBreakingNewsCall(countryCode: String) {
-        breakingNews.postValue(Resource.Loading())
+        breakingNews.postValue(Resource.loading(null))
         try {
             if(hasInternetConnection()) {
                 val response = defaultNewsRepository.getBreakingNews(countryCode, breakingNewsPage)
                 breakingNews.postValue(handleBreakingNewsResponse(response))
             } else {
-                breakingNews.postValue(Resource.Error("No internet connection"))
+                breakingNews.postValue(Resource.error("No internet connection",null))
             }
         } catch(t: Throwable) {
             when(t) {
-                is IOException -> breakingNews.postValue(Resource.Error("Network Failure"))
-                else -> breakingNews.postValue(Resource.Error("Conversion Error"))
+                is IOException -> breakingNews.postValue(Resource.error("Network Failure",null))
+                else -> breakingNews.postValue(Resource.error("Conversion Error",null))
             }
         }
     }

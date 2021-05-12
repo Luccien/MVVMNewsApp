@@ -17,6 +17,7 @@ import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.androiddevs.mvvmnewsapp.util.Constants
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.SEARCH_NEWS_TIME_DELAY
 import com.androiddevs.mvvmnewsapp.util.Resource
+import com.androiddevs.mvvmnewsapp.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_search_news.*
 import kotlinx.android.synthetic.main.fragment_search_news.paginationProgressBar
@@ -62,8 +63,10 @@ class SearchNewsFragment @Inject constructor(
         }
 
         viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
-            when(response) {
-                is Resource.Success -> {
+            when(response.status) {
+                Status.SUCCESS -> {
+            //when(response) {
+              //  is Resource.Success -> {
                     hideProgressBar()
                     hideErrorMessage()
                     response.data?.let { newsResponse ->
@@ -75,14 +78,16 @@ class SearchNewsFragment @Inject constructor(
                         }
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
+                //is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
                         Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_LONG).show()
                         showErrorMessage(message)
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
+                //is Resource.Loading -> {
                     showProgressBar()
                 }
             }

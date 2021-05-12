@@ -17,6 +17,7 @@ import com.androiddevs.mvvmnewsapp.ui.NewsActivity
 import com.androiddevs.mvvmnewsapp.ui.NewsViewModel
 import com.androiddevs.mvvmnewsapp.util.Constants.Companion.QUERY_PAGE_SIZE
 import com.androiddevs.mvvmnewsapp.util.Resource
+import com.androiddevs.mvvmnewsapp.util.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_breaking_news.*
 import kotlinx.android.synthetic.main.item_error_message.*
@@ -51,8 +52,17 @@ class BreakingNewsFragment @Inject constructor(
 
 
         viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
-            when(response) {
-                is Resource.Success -> {
+            /*
+            when(response.status) {
+                Status.SUCCESS -> {
+                }
+            }*/
+
+
+            //when(response) {
+            when(response.status) {
+                Status.SUCCESS -> {
+                //is Resource.success -> {
                     hideProgressBar()
                     hideErrorMessage()
                     response.data?.let { newsResponse ->
@@ -64,14 +74,16 @@ class BreakingNewsFragment @Inject constructor(
                         }
                     }
                 }
-                is Resource.Error -> {
+                Status.ERROR -> {
+                //is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
                         Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_LONG).show()
                         showErrorMessage(message)
                     }
                 }
-                is Resource.Loading -> {
+                Status.LOADING -> {
+                //is Resource.Loading -> {
                     showProgressBar()
                 }
             }
