@@ -22,6 +22,8 @@ class NewsViewModel
 ): ViewModel() {
 
 
+    val insertBreakingNewsStatus: MutableLiveData<Resource<Article>> = MutableLiveData()
+
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var breakingNewsPage = 1
     var breakingNewsResponse: NewsResponse? = null
@@ -34,7 +36,6 @@ class NewsViewModel
 
 
     init {
-
         getBreakingNews("us")
     }
 
@@ -43,7 +44,6 @@ class NewsViewModel
     }
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
-
         safeSearchNewsCall(searchQuery)
     }
 
@@ -89,8 +89,21 @@ class NewsViewModel
 
 
 
-    fun saveArticle(article: Article) = viewModelScope.launch {
+    fun saveArticleIntoDB(article: Article) = viewModelScope.launch {
         defaultNewsRepository.upsert(article)
+    }
+
+    // TODO exchange upsert (set and update separation)-->  best practice
+    fun saveArticle(article: Article) {
+
+        if(article.urlToImage !="") {
+            saveArticleIntoDB(article)
+            insertBreakingNewsStatus.postValue(Resource.Success(article))
+        }
+        else{
+            insertBreakingNewsStatus.postValue(Resource.Error("Error: The urlToImage is missing",null))
+            return
+        }
     }
 
     fun getSavedNews() = defaultNewsRepository.getSavedNews()
