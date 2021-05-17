@@ -1,6 +1,6 @@
 package com.androiddevs.mvvmnewsapp.util
 
-// TODO right now it dos not reload data when screen is rotated but also
+// TODO right now it does not reload data when screen is rotated as supposed --- > change to reload data but rebuild screen sothat data news are shown
 open class Event<out T>(private val content: T) {
 
     var hasBeenHandled = false
