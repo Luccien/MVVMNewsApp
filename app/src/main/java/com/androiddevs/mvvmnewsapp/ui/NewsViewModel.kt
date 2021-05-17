@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.NewsResponse
 import com.androiddevs.mvvmnewsapp.repository.NewsRepository
+import com.androiddevs.mvvmnewsapp.util.Event
 import com.androiddevs.mvvmnewsapp.util.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -22,13 +23,13 @@ class NewsViewModel
 ): ViewModel() {
 
 
-    val insertBreakingNewsStatus: MutableLiveData<Resource<Article>> = MutableLiveData()
+    val insertBreakingNewsStatus: MutableLiveData<Event<Resource<Article>>> = MutableLiveData()
 
-    val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val breakingNews: MutableLiveData<Event<Resource<NewsResponse>>> = MutableLiveData()
     var breakingNewsPage = 1
     var breakingNewsResponse: NewsResponse? = null
 
-    val searchNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    val searchNews: MutableLiveData<Event<Resource<NewsResponse>>> = MutableLiveData()
     var searchNewsPage = 1
     var searchNewsResponse: NewsResponse? = null
     var newSearchQuery:String? = null
@@ -98,10 +99,10 @@ class NewsViewModel
 
         if(article.urlToImage !="") {
             saveArticleIntoDB(article)
-            insertBreakingNewsStatus.postValue(Resource.success(article))
+            insertBreakingNewsStatus.postValue(Event(Resource.success(article)))
         }
         else{
-            insertBreakingNewsStatus.postValue(Resource.error("Error: The urlToImage is missing",null))
+            insertBreakingNewsStatus.postValue(Event(Resource.error("Error: The urlToImage is missing",null)))
             return
         }
     }
@@ -116,35 +117,35 @@ class NewsViewModel
 
     private suspend fun safeSearchNewsCall(searchQuery: String) {
         newSearchQuery = searchQuery
-        searchNews.postValue(Resource.loading(null))
+        searchNews.postValue(Event(Resource.loading(null)))
         try {
             if(hasInternetConnection()) {
                 val response = defaultNewsRepository.searchNews(searchQuery, searchNewsPage)
-                searchNews.postValue(handleSearchNewsResponse(response))
+                searchNews.postValue(Event(handleSearchNewsResponse(response)))
             } else {
-                searchNews.postValue(Resource.error("No internet connection",null))
+                searchNews.postValue(Event(Resource.error("No internet connection",null)))
             }
         } catch(t: Throwable) {
             when(t) {
-                is IOException -> searchNews.postValue(Resource.error("Network Failure",null))
-                else -> searchNews.postValue(Resource.error("Conversion Error",null))
+                is IOException -> searchNews.postValue(Event(Resource.error("Network Failure",null)))
+                else -> searchNews.postValue(Event(Resource.error("Conversion Error",null)))
             }
         }
     }
 
     private suspend fun safeBreakingNewsCall(countryCode: String) {
-        breakingNews.postValue(Resource.loading(null))
+        breakingNews.postValue(Event(Resource.loading(null)))
         try {
             if(hasInternetConnection()) {
                 val response = defaultNewsRepository.getBreakingNews(countryCode, breakingNewsPage)
-                breakingNews.postValue(handleBreakingNewsResponse(response))
+                breakingNews.postValue(Event(handleBreakingNewsResponse(response)))
             } else {
-                breakingNews.postValue(Resource.error("No internet connection",null))
+                breakingNews.postValue(Event(Resource.error("No internet connection",null)))
             }
         } catch(t: Throwable) {
             when(t) {
-                is IOException -> breakingNews.postValue(Resource.error("Network Failure",null))
-                else -> breakingNews.postValue(Resource.error("Conversion Error",null))
+                is IOException -> breakingNews.postValue(Event(Resource.error("Network Failure",null)))
+                else -> breakingNews.postValue(Event(Resource.error("Conversion Error",null)))
             }
         }
     }

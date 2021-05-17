@@ -51,42 +51,34 @@ class BreakingNewsFragment @Inject constructor(
         }
 
 
-        viewModel.breakingNews.observe(viewLifecycleOwner, Observer { response ->
-            /*
-            when(response.status) {
+        viewModel.breakingNews.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+            when (response.status) {
                 Status.SUCCESS -> {
-                }
-            }*/
-
-
-            //when(response) {
-            when(response.status) {
-                Status.SUCCESS -> {
-                //is Resource.success -> {
                     hideProgressBar()
                     hideErrorMessage()
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles.toList())
                         val totalPages = newsResponse.totalResults / QUERY_PAGE_SIZE + 2
                         isLastPage = viewModel.breakingNewsPage == totalPages
-                        if(isLastPage) {
+                        if (isLastPage) {
                             rvBreakingNews.setPadding(0, 0, 0, 0)
                         }
                     }
                 }
                 Status.ERROR -> {
-                //is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_LONG)
+                            .show()
                         showErrorMessage(message)
                     }
                 }
                 Status.LOADING -> {
-                //is Resource.Loading -> {
                     showProgressBar()
                 }
             }
+        }
         })
 
         btnRetry.setOnClickListener {

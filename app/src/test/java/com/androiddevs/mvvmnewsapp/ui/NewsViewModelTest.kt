@@ -6,7 +6,7 @@ import com.androiddevs.mvvmnewsapp.getOrAwaitValueTest
 import com.androiddevs.mvvmnewsapp.models.Article
 import com.androiddevs.mvvmnewsapp.models.Source
 import com.androiddevs.mvvmnewsapp.repository.FakeDefaultNewsRepository
-import com.androiddevs.mvvmnewsapp.util.Resource
+import com.androiddevs.mvvmnewsapp.util.Status
 import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Rule
@@ -33,12 +33,7 @@ class NewsViewModelTest {
 
         val value = viewModel.insertBreakingNewsStatus.getOrAwaitValueTest()
 
-        // TODO getContentIfNotHandled()
-        //assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)
-
-        //assertThat(value.OfType).isEqualTo(Resource.Error("f","f"))
-                 /// TODO Resource Status reprogramm
-        assertThat(value is Resource.Success) // NO GOOD TEST
+        assertThat(value.getContentIfNotHandled()?.status).isEqualTo(Status.ERROR)
     }
 
 

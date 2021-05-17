@@ -62,33 +62,37 @@ class SearchNewsFragment @Inject constructor(
             }
         }
 
-        viewModel.searchNews.observe(viewLifecycleOwner, Observer { response ->
-            when(response.status) {
-                Status.SUCCESS -> {
-            //when(response) {
-              //  is Resource.Success -> {
-                    hideProgressBar()
-                    hideErrorMessage()
-                    response.data?.let { newsResponse ->
-                        newsAdapter.differ.submitList(newsResponse.articles.toList())
-                        val totalPages = newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
-                        isLastPage = viewModel.searchNewsPage == totalPages
-                        if(isLastPage) {
-                            rvSearchNews.setPadding(0, 0, 0, 0)
+        viewModel.searchNews.observe(viewLifecycleOwner, Observer {
+            it.getContentIfNotHandled()?.let { response ->
+                when (response.status) {
+                    Status.SUCCESS -> {
+
+                        hideProgressBar()
+                        hideErrorMessage()
+                        response.data?.let { newsResponse ->
+                            newsAdapter.differ.submitList(newsResponse.articles.toList())
+                            val totalPages =
+                                newsResponse.totalResults / Constants.QUERY_PAGE_SIZE + 2
+                            isLastPage = viewModel.searchNewsPage == totalPages
+                            if (isLastPage) {
+                                rvSearchNews.setPadding(0, 0, 0, 0)
+                            }
                         }
                     }
-                }
-                Status.ERROR -> {
-                //is Resource.Error -> {
-                    hideProgressBar()
-                    response.message?.let { message ->
-                        Toast.makeText(activity, "An error occured: $message", Toast.LENGTH_LONG).show()
-                        showErrorMessage(message)
+                    Status.ERROR -> {
+                        hideProgressBar()
+                        response.message?.let { message ->
+                            Toast.makeText(
+                                activity,
+                                "An error occured: $message",
+                                Toast.LENGTH_LONG
+                            ).show()
+                            showErrorMessage(message)
+                        }
                     }
-                }
-                Status.LOADING -> {
-                //is Resource.Loading -> {
-                    showProgressBar()
+                    Status.LOADING -> {
+                        showProgressBar()
+                    }
                 }
             }
         })
