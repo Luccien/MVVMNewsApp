@@ -44,7 +44,6 @@ https://www.youtube.com/watch?v=lH6n4--3R5k
 Project Start from:
 News App Series - Philipp Lackner
 https://www.youtube.com/watch?v=asuOWE5KuFM&list=PLQkwcJG4YTCRF8XiCRESq1IFFW8COlxYJ
------------
 ---------------
 
 ((B1))
